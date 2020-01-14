@@ -8,7 +8,7 @@ allowed_machine_types = [
 ]
 
 main = rule {
-  all tfplan.resources.google_compute_instance as _, instances {
+  all tfplan.resources.aws_instance as _, instances {
     all instances as _, r {
       r.applied.machine_type in allowed_machine_types
     }
