@@ -1,10 +1,16 @@
 {
     "mock": {
-      "tfconfig": "../../testdata/mock-tfconfig.sentinel",
+      "tfconfig": "../../testdata/mock-tfconfig-v2.sentinel",
       "tfplan": "../../testdata/mock-tfplan.sentinel",
       "tfstate": "../../testdata/mock-tfstate.sentinel",
       "tfrun": "../../testdata/mock-tfrun.sentinel"
     },
+
+    "param": {
+      "version": "v2.2.1",
+      "push_date": "2017-09-17T13:25:29Z"
+    },
+
     "test": {
       "main": true
     }

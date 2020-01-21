@@ -1,4 +1,13 @@
 import "time"
+import "tfconfig"
+
+param version
+param push_date
+
+print("Parameter New Module Version:" , version)
+print("Parameter Module Push Date:" , push_date)
+
+print(tfconfig.module_calls["ec2-instance"].version_constraint)
 
 
 main = rule {
