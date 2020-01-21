@@ -1,0 +1,17 @@
+import "tfplan"
+import "tfconfig"
+import "tfrun"
+import "time"
+
+
+has_aws_region =  func(){
+    if length(tfrun.variables.aws_region) > 0 {
+        print("aws_region found")
+        print(tfrun.variables.aws_region)
+        return true
+    }
+}
+
+main = rule {
+  has_aws_region()
+}

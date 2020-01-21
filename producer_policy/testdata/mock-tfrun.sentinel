@@ -1,0 +1,58 @@
+import "strings"
+import "types"
+
+created_at = "2020-01-14T18:27:56.167Z"
+message = "Queued manually in Terraform Cloud"
+speculative = false
+is_destroy = false
+
+variables = {
+	"AWS_ACCESS_KEY": {
+		"category":  "env",
+		"sensitive": false,
+	},
+	"AWS_SECRET_KEY": {
+		"category":  "env",
+		"sensitive": false,
+	},
+	"CONFIRM_DESTROY": {
+		"category":  "env",
+		"sensitive": false,
+	},
+	"aws_region": {
+		"category":  "terraform",
+		"sensitive": false,
+	},
+	"default_tags": {
+		"category":  "terraform",
+		"sensitive": false,
+	},
+	"project_name": {
+		"category":  "terraform",
+		"sensitive": false,
+	},
+}
+
+organization = {
+	"name": "fidelity_tfe_demo",
+}
+
+workspace = {
+	"auto_apply":  false,
+	"created_at":  "2020-01-14T16:37:04.285Z",
+	"description": null,
+	"name":        "consumer-marketingapp-dev",
+	"vcs_repo": {
+		"branch":             "",
+		"display_identifier": "hashidemo2020/main_workspace",
+		"identifier":         "hashidemo2020/main_workspace",
+		"ingress_submodules": false,
+	},
+	"working_directory": "",
+}
+
+cost_estimate = {
+	"delta_monthly_cost":    "8.208",
+	"prior_monthly_cost":    "9.3197419354838736",
+	"proposed_monthly_cost": "17.5277419354838736",
+}

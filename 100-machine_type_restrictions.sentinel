@@ -1,5 +1,7 @@
 import "tfplan"
 
+print tfplan
+
 allowed_machine_types = [
   "t2.micro",
   "t3.small",
