@@ -47,5 +47,5 @@ check_compliance = func(){
 
 
 main = rule {
-  version_match() and within_graceperiod()
+  check_compliance()
 }
