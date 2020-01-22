@@ -27,17 +27,26 @@ print(grace_period_secs>duration_secs)
 
 
 version_match = func(){
-  if (current_version != version) {
-    return false
-  } else {
-    return true
-  }
+  return current_version != version
 }
 
 within_graceperiod = func() {
   return grace_period_secs>duration_secs
 }
 
+check_compliance = func(){
+  if version_match() {
+    return true
+  }
+
+  if within_graceperiod() {
+    return true
+  } else {
+    false
+  }
+
+
+}
 
 
 main = rule {

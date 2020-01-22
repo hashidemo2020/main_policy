@@ -8,11 +8,11 @@
 
   "param": {
     "version": "2.2.1",
-    "push_date": "2017-09-23T13:25:29Z",
+    "push_date": "2020-01-24T13:25:29Z",
     "grace_period_mins"  : 3
   },
 
   "test": {
-    "main": false
+    "main": true
   }
 }
