@@ -12,17 +12,16 @@ current_date = time.now["rfc3339"]
 current_version = tfconfig.modules["ec2-instance"].version
 
 
-print("Parameter New Module Version:" , version)
+print("Module Version for Compliance (Param):" , version)
 print("Tfconfig Module Version:", current_version)
-print("Push Date:" , push_date)
-print("Current Date:", current_date)
+print("Version Compliance Date/Time (Param):" , push_date)
+print("Current Date/Time:", current_date)
 
 duration_secs = time.load(current_date).sub(push_date)/1000000000
 
 print("Time Difference in secs (Current Date - Push Date):", duration_secs)
-print("Grace period in Secs", grace_period_secs)
-
-print(grace_period_secs>duration_secs)
+print("Grace period in Secs (Param)", grace_period_secs)
+print("Within Grace Period?" , grace_period_secs>duration_secs)
 
 
 
@@ -42,10 +41,8 @@ check_compliance = func(){
   if within_graceperiod() {
     return true
   } else {
-    false
+    return false
   }
-
-
 }
 
 

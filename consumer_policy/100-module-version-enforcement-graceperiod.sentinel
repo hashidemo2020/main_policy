@@ -9,8 +9,7 @@ current_date = time.now["rfc3339"]
 #current_version = tfconfig.module_calls["ec2-instance"].version_constraint
 current_version = tfconfig.modules["ec2-instance"].version
 
-
-print("Parameter New Module Version:" , version)
+print("Module Version for Compliance(Param):" , version)
 print("Tfconfig Module Version:", current_version)
 
 in_compliance = func(){
@@ -20,8 +19,6 @@ in_compliance = func(){
     return true
   }
 }
-
-
 
 main = rule {
   in_compliance()
