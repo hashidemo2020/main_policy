@@ -1,5 +1,5 @@
 import "time"
-import "tfconfig-v2" as tfconfig
+import "tfconfig"
 
 param version
 param push_date
@@ -8,7 +8,8 @@ param grace_period_mins
 grace_period_secs = grace_period_mins * 60
 
 current_date = time.now["rfc3339"]
-current_version = tfconfig.module_calls["ec2-instance"].version_constraint
+#current_version = tfconfig.module_calls["ec2-instance"].version_constraint
+current_version = tfconfig.modules["ec2-instance"].version
 
 
 print("Parameter New Module Version:" , version)

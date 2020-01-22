@@ -6,18 +6,12 @@ param push_date
 param grace_period_mins
 
 current_date = time.now["rfc3339"]
-current_version = tfconfig.module_calls["ec2-instance"].version_constraint
+#current_version = tfconfig.module_calls["ec2-instance"].version_constraint
+current_version = tfconfig.modules["ec2-instance"].version
 
 
 print("Parameter New Module Version:" , version)
 print("Tfconfig Module Version:", current_version)
-print("Push Date:" , push_date)
-print("Current Date:", current_date)
-
-duration_secs = time.load(current_date).sub(push_date)/1000000000
-
-print("Time Difference in secs (Current Date - Push Date):", duration_secs)
-
 
 in_compliance = func(){
   if (current_version != version) {
