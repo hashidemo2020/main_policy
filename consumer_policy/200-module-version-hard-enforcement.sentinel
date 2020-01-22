@@ -35,13 +35,17 @@ within_graceperiod = func() {
 
 check_compliance = func(){
   if version_match() {
-    return true
-  }
-
-  if within_graceperiod() {
+    print("The Version matches!")
     return true
   } else {
-    return false
+    print("The Version doesn't match!")
+    if within_graceperiod() {
+      print("Within Grace period - we can pass the test")
+      return true
+    } else {
+       print("Outside Grace period - we can fail the test")
+      return false
+    }
   }
 }
 
