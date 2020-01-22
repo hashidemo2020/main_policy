@@ -26,7 +26,7 @@ print("Within Grace Period?" , grace_period_secs>duration_secs)
 
 
 version_match = func(){
-  return current_version != version
+  return current_version == version
 }
 
 within_graceperiod = func() {
