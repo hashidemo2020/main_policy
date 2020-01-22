@@ -1,5 +1,5 @@
 import "time"
-import "tfconfig"
+import "tfconfig-v2" as tfconfig
 
 param version
 param push_date
@@ -27,7 +27,7 @@ print(grace_period_secs>duration_secs)
 
 in_compliance = func(){
   if (current_version != version) {
-    print("test")
+
      return grace_period_secs>duration_secs
   } else {
     return true
