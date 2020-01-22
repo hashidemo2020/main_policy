@@ -4,9 +4,11 @@ import "tfrun"
 import "time"
 
 has_aws_region =  func(){
-    if length(tfrun.variables.aws_regionxxx) > 0 {
+    if length(tfrun.variables.aws_region) > 0 {
         print("aws_region found")
         return true
+    } else {
+      return false
     }
 }
 

@@ -9,6 +9,8 @@ has_aws_region =  func(){
         print("aws_region found")
         print(tfrun.variables.aws_region)
         return true
+    } else {
+      return false
     }
 }
 
