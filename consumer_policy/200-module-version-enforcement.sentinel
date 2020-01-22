@@ -1,6 +1,41 @@
 import "time"
+import "tfconfig"
+
+param version
+param push_date
+param grace_period_mins
+
+grace_period_secs = grace_period_mins * 60
+
+current_date = time.now["rfc3339"]
+current_version = tfconfig.module_calls["ec2-instance"].version_constraint
+
+
+print("Parameter New Module Version:" , version)
+print("Tfconfig Module Version:", current_version)
+print("Push Date:" , push_date)
+print("Current Date:", current_date)
+
+duration_secs = time.load(current_date).sub(push_date)/1000000000
+
+print("Time Difference in secs (Current Date - Push Date):", duration_secs)
+print("Grace period in Secs", grace_period_secs)
+
+print(grace_period_secs>duration_secs)
+
+
+
+in_compliance = func(){
+  if (current_version != version) {
+    print("test")
+     return grace_period_secs>duration_secs
+  } else {
+    return true
+  }
+}
+
 
 
 main = rule {
-  true
+  in_compliance()
 }
