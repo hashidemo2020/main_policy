@@ -1,5 +1,6 @@
 import "time"
 import "tfconfig"
+import "decimal"
 
 param version
 param push_date
@@ -7,48 +8,49 @@ param grace_period_mins
 
 grace_period_secs = grace_period_mins * 60
 
-current_date = time.now["rfc3339"]
-#current_version = tfconfig.module_calls["ec2-instance"].version_constraint
+current_date    = time.now["rfc3339"]
 current_version = tfconfig.modules["ec2-instance"].version
-
-
-print("Module Version for Compliance (Param):" , version)
-print("Tfconfig Module Version:", current_version)
-print("Version Compliance Date/Time (Param):" , push_date)
-print("Current Date/Time:", current_date)
-
-duration_secs = time.load(current_date).sub(push_date)/1000000000
-
-print("Time Difference in secs (Current Date - Push Date):", duration_secs)
-print("Grace period in Secs (Param)", grace_period_secs)
-print("Within Grace Period?" , grace_period_secs>duration_secs)
-
-
+deadline        = time.load(push_date).add(time.minute * decimal.new(grace_period_mins).int)
+duration_secs   = time.load(current_date).sub(push_date)/1000000000 * -1
 
 version_match = func(){
   return current_version == version
 }
 
 within_graceperiod = func() {
-  return grace_period_secs>duration_secs
+  return grace_period_secs > duration_secs
 }
 
 check_compliance = func(){
   if version_match() {
-    print("The Version matches!")
+    print("aws-ec2-instance module")
+    print("-----------------------")
+    print("Using compliant version:", current_version)
     return true
   } else {
-    print("The Version doesn't match!")
     if within_graceperiod() {
-      print("Within Grace period - we can pass the test")
+      print("----------------------------------------------------------------")
+      print("|")
+      print("| WARNING: Your aws-ec2-instance module is out of compliance.")
+      print("| Required version:", version)
+      print("| Version in use:", current_version)
+      print("| Please upgrade by:", deadline.rfc3339)
+      print("|")
+      print("----------------------------------------------------------------")
       return true
     } else {
-       print("Outside Grace period - we can fail the test")
+      print("----------------------------------------------------------------")
+      print("|")
+      print("| ERROR: Your aws-ec2-instance module is out of compliance.")
+      print("| Required version:", version)
+      print("| Version in use:", current_version)
+      print("| Please upgrade IMMEDIATELY!")
+      print("|")
+      print("----------------------------------------------------------------")
       return false
     }
   }
 }
-
 
 main = rule {
   check_compliance()

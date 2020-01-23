@@ -1,0 +1,29 @@
+now = func(_) {
+  return {
+    "day": 23,
+    "hour": 13,
+    "minute": 26,
+    "month": 1,
+    "month_name": "January",
+    "rfc3339": "2020-01-23T13:26:33.858057Z",
+    "second": 33,
+    "unix": 1579785993,
+    "unix_nano": 1579785993858057000,
+    "weekday": 4,
+    "weekday_name":
+    "Thursday",
+    "year": 2020,
+    "zone": 0,
+    "zone_string": "+00:00",
+  }
+}
+
+load = func(_) {
+  return {
+    "year": 2021,
+    "month": 1,
+    "day": 23,
+    "hour": 13,
+    "minutes": 20,
+  }
+}
