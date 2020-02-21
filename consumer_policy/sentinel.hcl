@@ -10,6 +10,6 @@ policy "101-config-version-soft-enforcement-graceperiod" {
     enforcement_level = "soft-mandatory"
 }
 
-policy "201-config-version-hard-enforcement" {
-    enforcement_level = "hard-mandatory"
-}
+#policy "201-config-version-hard-enforcement" {
+#    enforcement_level = "hard-mandatory"
+#}

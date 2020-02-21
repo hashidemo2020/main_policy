@@ -13,6 +13,6 @@
     },
 
     "test": {
-      "main": true
+      "main": false
     }
   }

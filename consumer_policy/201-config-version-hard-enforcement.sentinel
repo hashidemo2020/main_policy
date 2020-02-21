@@ -22,6 +22,11 @@ within_graceperiod = func() {
 }
 
 check_compliance = func(){
+  print("grace_period_secs:", grace_period_secs)
+  print("deadline:", deadline)
+  print("duration_secs:", duration_secs)
+
+
   if version_match() {
     print("-----------------------")
     print("Using compliant version:", current_config_version)
