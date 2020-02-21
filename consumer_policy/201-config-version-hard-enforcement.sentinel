@@ -5,16 +5,17 @@ import "decimal"
 param version
 param push_date
 param grace_period_mins
+param active_config_view_workspace
 
 grace_period_secs = grace_period_mins * 60
 
 current_date    = time.now["rfc3339"]
-current_version = tfconfig.modules["ec2-instance"].version
+current_config_version = tfplan.variables.config_version
 deadline        = time.load(push_date).add(time.minute * decimal.new(grace_period_mins).int)
 duration_secs   = time.load(current_date).sub(push_date)/1000000000 * -1
 
 version_match = func(){
-  return current_version == version
+  return current_config_version == active_config_view_workspace
 }
 
 within_graceperiod = func() {
@@ -23,17 +24,17 @@ within_graceperiod = func() {
 
 check_compliance = func(){
   if version_match() {
-    print("aws-ec2-instance module")
+    print("Current ECC Config Version")
     print("-----------------------")
-    print("Using compliant version:", current_version)
+    print("Using compliant version:", current_config_version)
     return true
   } else {
     if within_graceperiod() {
       print("----------------------------------------------------------------")
       print("|")
-      print("| WARNING: Your aws-ec2-instance module is out of compliance.")
+      print("| WARNING: Your ECC Config View Version is out of compliance.")
       print("| Required version:", version)
-      print("| Version in use:", current_version)
+      print("| Version in use:", current_config_version)
       print("| Please upgrade by:", deadline.rfc3339)
       print("|")
       print("----------------------------------------------------------------")
@@ -41,9 +42,9 @@ check_compliance = func(){
     } else {
       print("----------------------------------------------------------------")
       print("|")
-      print("| ERROR: Your aws-ec2-instance module is out of compliance.")
+      print("| ERROR: Your ECC Config View Version is out of compliance.")
       print("| Required version:", version)
-      print("| Version in use:", current_version)
+      print("| Version in use:", current_config_version)
       print("| Please upgrade IMMEDIATELY!")
       print("|")
       print("----------------------------------------------------------------")
