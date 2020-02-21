@@ -1,8 +1,7 @@
 import "time"
-import "tfconfig"
+import "tfplan"
 import "decimal"
 
-param version
 param push_date
 param grace_period_mins
 param active_config_view_workspace

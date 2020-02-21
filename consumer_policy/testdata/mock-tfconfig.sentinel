@@ -3,36 +3,53 @@ import "types"
 
 _modules = {
 	"root": {
-		"data": {},
+		"data": {
+			"terraform_remote_state": {
+				"ecc_view": {
+					"config": {
+						"backend": "remote",
+					},
+					"provisioners": null,
+					"references": {
+						"backend": [],
+						"config": [
+							"var.bu_name",
+							"var.config_version",
+						],
+					},
+				},
+			},
+		},
 		"modules": {
 			"ec2-instance": {
 				"config": {
-					"ami":            "ami-03fe4ab7cbc8fe59d",
 					"instance_count": 1,
-					"instance_type":  "t2.small",
-					"key_name":       "Prakash Test",
 					"monitoring":     true,
-					"tags": {
-						"Environment": "dev",
-						"Terraform":   "true",
-					},
 				},
 				"references": {
-					"ami":            [],
+					"ami": [
+						"var.ec2_ami",
+					],
 					"instance_count": [],
-					"instance_type":  [],
-					"key_name":       [],
-					"monitoring":     [],
+					"instance_type": [
+						"var.instance_type",
+					],
+					"key_name": [
+						"var.instance_key_name",
+					],
+					"monitoring": [],
 					"name": [
 						"var.project_name",
 					],
 					"subnet_id": [
-						"aws_subnet.main",
+						"data.terraform_remote_state.ecc_view",
 					],
-					"tags": [],
+					"tags": [
+						"var.default_tags",
+					],
 				},
-				"source":  "app.terraform.io/fidelity_tfe_demo/ec2-instance/aws",
-				"version": "2.12.0",
+				"source":  "app.terraform.io/FMR_BU1/ec2-instance/aws",
+				"version": "3.1.1",
 			},
 		},
 		"outputs": {},
@@ -58,93 +75,39 @@ _modules = {
 				"version": "",
 			},
 		},
-		"resources": {
-			"aws_internet_gateway": {
-				"gw": {
-					"config":       {},
-					"provisioners": null,
-					"references": {
-						"tags": [
-							"var.default_tags",
-						],
-						"vpc_id": [
-							"aws_vpc.main",
-						],
-					},
-				},
-			},
-			"aws_security_group": {
-				"lc_security_group": {
-					"config":       {},
-					"provisioners": null,
-					"references": {
-						"description": [
-							"var.project_name",
-						],
-						"name_prefix": [
-							"var.project_name",
-						],
-						"tags": [
-							"var.project_name",
-							"var.default_tags",
-						],
-						"vpc_id": [
-							"aws_vpc.main",
-						],
-					},
-				},
-			},
-			"aws_subnet": {
-				"main": {
-					"config": {
-						"cidr_block": "10.0.0.0/24",
-					},
-					"provisioners": null,
-					"references": {
-						"cidr_block": [],
-						"tags": [
-							"var.default_tags",
-						],
-						"vpc_id": [
-							"aws_vpc.main",
-						],
-					},
-				},
-			},
-			"aws_vpc": {
-				"main": {
-					"config": {
-						"cidr_block": "10.0.0.0/16",
-					},
-					"provisioners": null,
-					"references": {
-						"cidr_block": [],
-						"instance_tenancy": [
-							"var.tenancy",
-						],
-						"tags": [
-							"var.default_tags",
-						],
-					},
-				},
-			},
-		},
+		"resources": {},
 		"variables": {
 			"aws_region": {
 				"default":     null,
 				"description": "the region where thhis vault cluster will be installed",
 			},
+			"bu_name": {
+				"default":     null,
+				"description": "org where Remote Workspace for ECC View is defined",
+			},
+			"config_version": {
+				"default":     null,
+				"description": "Remote Workspace where ECC View is defined",
+			},
 			"default_tags": {
 				"default":     null,
 				"description": "Tags to be applied to resources",
 			},
+			"ec2_ami": {
+				"default":     null,
+				"description": "ami for ec2",
+			},
+			"instance_key_name": {
+				"default":     null,
+				"description": "Key to be used for resource",
+			},
+			"instance_type": {
+				"default":     null,
+				"description": "the AWS instance type",
+			},
 			"project_name": {
 				"default":     null,
 				"description": "the name for this project or application",
-			},
-			"tenancy": {
-				"default":     "default",
-				"description": "The tenancy of the instance. Must be one of: default or dedicated.",
 			},
 		},
 	},

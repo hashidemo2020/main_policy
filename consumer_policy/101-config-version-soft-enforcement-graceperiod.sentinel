@@ -1,17 +1,20 @@
 
 import "time"
-import "tfconfig"
+import "tfplan"
 import "decimal"
 
-param version
 param push_date
 param grace_period_mins
 param active_config_view_workspace
 
-current_config_version = tfplan.variables.version
+current_config_version = tfplan.variables.config_version
 deadline        = time.load(push_date).add(time.minute * decimal.new(grace_period_mins).int)
 
 in_compliance = func(){
+  print("-------VARIABLES----------------")
+  print("TFPLAN Version:", tfplan.variables.config_version)
+  print("EXPECTED Version:", active_config_view_workspace)
+
   if (current_config_version != active_config_view_workspace) {
     print("----------------------------------------------------------------")
     print("|")
