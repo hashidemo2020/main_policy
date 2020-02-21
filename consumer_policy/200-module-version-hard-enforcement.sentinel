@@ -31,7 +31,8 @@ check_compliance = func(){
     if within_graceperiod() {
       print("----------------------------------------------------------------")
       print("|")
-      print("| WARNING: Your aws-ec2-instance module is out of compliance.")
+      print("| WARNING: Your ECC Config View Version is out of compliance.")
+      print("| WARNING: You are however within the Grace period. Start planning to move to the new version")
       print("| Required version:", version)
       print("| Version in use:", current_version)
       print("| Please upgrade by:", deadline.rfc3339)
@@ -41,7 +42,7 @@ check_compliance = func(){
     } else {
       print("----------------------------------------------------------------")
       print("|")
-      print("| ERROR: Your aws-ec2-instance module is out of compliance.")
+      print("| ERROR: Your ECC Config View Version  is out of compliance.")
       print("| Required version:", version)
       print("| Version in use:", current_version)
       print("| Please upgrade IMMEDIATELY!")
