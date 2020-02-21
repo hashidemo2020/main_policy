@@ -6,6 +6,7 @@ import "decimal"
 param version
 param push_date
 param grace_period_mins
+param active_config_view_workspace
 
 current_version = tfconfig.modules["ec2-instance"].version
 deadline        = time.load(push_date).add(time.minute * decimal.new(grace_period_mins).int)
