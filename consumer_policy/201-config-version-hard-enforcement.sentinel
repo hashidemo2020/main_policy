@@ -23,7 +23,6 @@ within_graceperiod = func() {
 
 check_compliance = func(){
   if version_match() {
-    print("Current ECC Config Version")
     print("-----------------------")
     print("Using compliant version:", current_config_version)
     return true
@@ -32,7 +31,9 @@ check_compliance = func(){
       print("----------------------------------------------------------------")
       print("|")
       print("| WARNING: Your ECC Config View Version is out of compliance.")
+      print("| WARNING: You are however within the Grace period. Start planning to move to the new version")
       print("| Version in use:", current_config_version)
+      print("| Version Expected", active_config_view_workspace)
       print("| Please upgrade by:", deadline.rfc3339)
       print("|")
       print("----------------------------------------------------------------")
