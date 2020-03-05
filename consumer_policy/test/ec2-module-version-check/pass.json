@@ -1,0 +1,16 @@
+{
+  "mock": {
+    "tfconfig": "../../testdata/mock-tfconfig.sentinel",
+    "tfplan": "../../testdata/mock-tfplan.sentinel",
+    "tfstate": "../../testdata/mock-tfstate.sentinel",
+    "tfrun": "../../testdata/mock-tfrun.sentinel"
+  },
+  "param": {
+    "ec2_module_version": "3.1.1",
+    "push_date": "2017-09-23T13:25:29Z",
+    "grace_period_mins"  : 3
+  },
+  "test": {
+    "main": true
+  }
+}
